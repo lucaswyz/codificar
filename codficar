@@ -1,0 +1,48 @@
+rograma
+{
+	inclua biblioteca Tipos --> ti
+	inclua biblioteca Texto
+ --> t
+	
+	
+const cadeia alfabeto[26] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}
+	funcao inicio()
+	{
+ 
+		criptografar("LEGAL", 3)
+	}
+	
+	funcao criptografar(cadeia texto, inteiro chave)
+	{
+	    
+	   cadeia letra = " "
+	   caracter letra_caracter = ' '
+	   inteiro posicao 
+	   inteiro numero_letras_frase 
+	   logico esta_no_alfabeto
+
+	   numero_letras_frase = t.numero_caracteres(texto)
+	   
+
+	   para(inteiro h =  0; h < numero_letras_frase; h++)
+	   {
+
+	   	logico ESTANOALFABETO = falso
+	   	letra_caracter = t.obter_caracter(texto,h)
+	   	letra = ti.caracter_para_cadeia(letra_caracter)
+	   	
+	   	
+	  	para(inteiro i=0; i < 27; i++)
+        	{
+        		se(letra == alfabeto[i])
+       		{
+        		posicao = i - chave
+
+        		escreva(alfabeto[posicao]) 
+        		esta_no_alfabeto = verdadeiro 
+        		pare
+				}
+			}
+		}	
+	}//fim da função criptografar
+}
