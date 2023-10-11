@@ -1,6 +1,32 @@
-print("-=-" * 16)
+pprint("-=-" * 16)
 print(15 * " ", "CIFRA DE CÉSAR")
 print("-=-" * 16)
+
+def encriptar(chave, alfabeto, texto):
+    cripto = ''
+    for letra in texto:
+        if letra == " ":
+            cripto += " "
+        else:
+            posicao = alfabeto.find(letra)
+            posicao += chave
+            if posicao > len(alfabeto):
+                posicao -= len(alfabeto)
+            cripto += alfabeto[posicao]
+    return cripto
+
+def descriptar(chave, alfabeto, cripto):
+    texto = ''
+    for letra in cripto:
+        if letra == " ":
+            texto += " "
+        else:
+            posicao = alfabeto.find(letra)
+            posicao = (posicao - chave) % len(alfabeto)
+            texto += alfabeto[posicao]
+    return texto
+
+opcao = int(input("\nEscolha o modo que deseja\n[ 1 ] Criptografar\n[ 2 ] Descriptografar\n "))
 
 chave = int(input("Digite a chave de criptografia (Máx. 26): "))
 while chave > 26 or chave < 0:
@@ -8,36 +34,11 @@ while chave > 26 or chave < 0:
 
 alfabeto = "abcdefghijklmnopqrstuvwxyz"
 
-opcao = int(input("\nEscolha o modo que vc deseja\n[ 1 ] Encriptar\n[ 2 ] Descriptar\n "))
-
-texto = str(input("\nInsira o texto: ")).lower()
-
-cripto = ' '
+texto = input("\nInsira o texto: ").lower()
 
 if opcao == 1:
-    for letra in texto:
-        posicao = alfabeto.find(letra)
-        posicao += chave
-
-        if posicao > len(alfabeto):
-            posicao -= len(alfabeto)
-
-        if letra == " ":
-            cripto += " "
-
-        cripto += alfabeto[posicao]
-
+    cripto = encriptar(chave, alfabeto, texto)
+    print("Sua mensagem criptografada:", cripto)
 elif opcao == 2:
-    for letra in texto:
-        posicao = alfabeto.find(letra)
-        posicao -= chave
-
-        if posicao < 0:
-            posicao = len(alfabeto) - abs(posicao)
-
-        if letra == " ":
-            cripto += " "
-
-        cripto = cripto + alfabeto[posicao]
-
-print(f"Sua mensagem:" + cripto)
+    texto = descriptar(chave, alfabeto, texto)
+    print("Sua mensagem descriptografada:", texto)
